@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+user detail
+{% endblock %}
+{% block mycontent %}
+<h1>user name: {{user.username}}</h1>
+<h1>user id: {{user.id}}</h1>
+<p>Couses published by {{user.name}}</p>
+<ul>
+{% for item in user.publish_courses  %}
+    <li>{{item.name}}</li>
+{% endfor %}
+</ul>
+{% endblock %}

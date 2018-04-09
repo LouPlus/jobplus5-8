@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{%block title %}Home{% endblock %}
+
+{%block mycontent %}
+
+{% for course in pg.items %}
+<h2>
+    <a href="{{course.url}}">{{ course.name }}</a> - {{ course.author.username }}
+</h2>
+{% endfor %}
+
+<div class="row">
+    {{ paginator(pg,'front.index')}}
+</div>
+
+{% endblock %}

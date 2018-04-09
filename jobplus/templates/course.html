@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+Course
+{% endblock %}
+{% block mycontent %}
+
+<h1>author name: {{course.author.username}}</h1>
+
+{% for cha in course.chapters %}
+    <h5>
+        <a href="{{cha.url}}">{{ cha.name }}</a>
+    </h5>
+    {{ cha.description }}
+    <br>
+{% endfor %}
+
+{% endblock %}
