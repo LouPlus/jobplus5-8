@@ -1,2 +1,3 @@
 # jobplus5-8
 * [张三思](https://github.com/notfresh)
+* [仙人球](https://github.com/NewCHYS)
