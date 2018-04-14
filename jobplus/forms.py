@@ -102,26 +102,3 @@ class LoginForm(FlaskForm):
            | (User.username == self.email_or_username.data)).first()
         return user
 
-# class CourseForm(FlaskForm):
-#     name = StringField('课程名称', validators=[Required(), Length(5, 32)])
-#     description = TextAreaField('课程简介', validators=[Required(), Length(20, 256)])
-#     image_url = StringField('封面图片地址', validators=[Required(), URL()])
-#     author_id = IntegerField('作者ID', validators=[Required(), NumberRange(min=1, message='无效的用户ID')])
-#     submit = SubmitField('提交')
-#
-#     def validate_author_id(self, field):
-#         if not User.query.get(self.author_id.data):
-#             raise ValidationError('用户不存在')
-#
-#     def create_course(self):
-#         course = Course()
-#         self.populate_obj(course)
-#         db.session.add(course)
-#         db.session.commit()
-#         return course
-#
-#     def update_course(self, course):
-#         self.populate_obj(course)
-#         db.session.add(course)
-#         db.session.commit()
-#         return course

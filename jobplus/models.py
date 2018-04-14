@@ -20,7 +20,9 @@ class User(BaseModel, UserMixin):
     ROLE_USER = 10
     ROLE_COMPANY = 20 # 企业
     ROLE_ADMIN = 30
+
     __tablename__ = 'user'
+
     username = db.Column(db.String(16), index=True, unique=True, nullable=False)
     email = db.Column(db.String(32), unique=True, index=True, nullable=False)
     _password = db.Column('password',db.String(256))

@@ -17,13 +17,13 @@ def register_extensions(app):
     Migrate(app, db)
     Bootstrap(app)
     login_manager = LoginManager()
+    login_manager.login_view = 'front.login'
     login_manager.init_app(app)
 
     @login_manager.user_loader
     def user_loader(id):
         return User.query.get(id)
 
-    login_manager.login_view = 'front.login'
 
 def create_app(config):
     app = Flask(__name__)
