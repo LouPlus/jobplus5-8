@@ -1,0 +1,53 @@
+{% macro show_flash_msg()%}
+    {% for msg in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>{{msg}}
+    </div>
+    {% endfor %}
+{% endmacro %}
+
+{% macro paginator(pg, end_point)%}
+    <nav class="nav-pagination" aria-label="Page navigation">
+        <ul class="pagination">
+            <li {% if not pg.has_prev %} class="disabled" {% endif %} ><a href="{{url_for(end_point, page = pg.prev_num)}}">&laquo;</a></li>
+            {% for page in pg.iter_pages() %}
+                {% if page %}
+                    {% if page==pg.page %}
+                        <li class="active"><a href="{{url_for(end_point, page=page)}}">{{page}}</a></li>
+                    {% else %}
+                        <li><a href="{{url_for(end_point, page=page)}}">{{page}}</a></li>
+                    {% endif %}
+                {% else %}
+                    <span class="ellipsis">...</span>
+                {% endif %}
+            {% endfor %}
+            <li {% if not pg.has_next %} class="disabled" {% endif %} ><a href="{{url_for(end_point, page = pg.next_num)}}">&raquo;</a></li>
+        </ul>
+    </nav>
+{% endmacro %}
+
+{% macro render_form(form, url) %}
+<form method="POST" action="{{ url }}">
+  {{ form.csrf_token }}
+  {% for field in form %}
+    {% if field.type == 'CSRFTokenField' %}
+    {{ '' }}
+    {% elif field.type == 'SubmitField' %}
+    {{ form.submit(class='btn btn-primary', type='submit') }}
+    {% elif field.type == 'BooleanField' %}
+    <div class="checkbox">
+      <label>{{ field() }} {{ field.label.text }}</label>
+    </div>
+    {% else %}
+    <div class="form-group {% if field.errors %}has-error{% endif %}">
+      {{ field.label }} {{ field(class='form-control') }}
+      {% if field.errors %}
+        {% for error in field.errors %}
+        <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
+    </div>
+    {% endif %}
+  {% endfor %}
+</form>
+{% endmacro %}
